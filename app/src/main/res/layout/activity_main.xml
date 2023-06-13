@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0E6FFF"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#0E6FFF"
+        tools:context=".MainActivity">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#0E6FFF"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="Dashboard"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="16dp"
+                    android:backgroundTint="#2B81FF">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/wrench" />
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/main_bg"
+            android:paddingBottom="20dp"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+            <TextView
+                android:id="@+id/greetings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:text="Good Morning"
+                android:textColor="#999CA0"
+                android:textSize="16sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="5dp"
+                android:text="Ajay Manva"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/greetings" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_line_chart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintTop_toBottomOf="@id/name">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="15dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:text="Overview"
+                            android:textColor="#999CA0"
+                            android:textSize="14sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="16dp"
+                            android:background="@drawable/texts_bg"
+                            android:gravity="center"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="5dp"
+                            app:layout_constraintTop_toBottomOf="@id/links_recycler">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/graph_dates"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableEnd="@drawable/clock"
+                                android:drawablePadding="8dp"
+                                android:text="22 Aug - 23 Sept"
+                                android:textColor="@color/black"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <com.jjoe64.graphview.GraphView
+                        android:id="@+id/graphView"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginBottom="15dp" />
+                </LinearLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/items_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/card_line_chart"
+                tools:listitem="@layout/daily_item" />
+
+            <LinearLayout
+
+                android:id="@+id/analytics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/texts_bg"
+                android:gravity="center"
+                android:paddingVertical="12dp"
+                app:layout_constraintTop_toBottomOf="@id/items_recycler">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/price_boost"
+                    android:drawablePadding="20dp"
+                    android:text="View Analytics"
+
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/select_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/analytics">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/top_links"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selected_text_bg"
+                    android:drawablePadding="20dp"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="6dp"
+                    android:state_selected="true"
+                    android:text="Top Links"
+                    android:textColor="@drawable/selected_text_color"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/recent_links"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/selected_text_bg"
+                    android:drawablePadding="20dp"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="6dp"
+                    android:text="Recent Links"
+                    android:textColor="@drawable/selected_text_color"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:backgroundTint="#f5f5f5"
+                    app:strokeColor="#999CA0"
+                    app:strokeWidth="1dp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:padding="7dp"
+                        android:src="@drawable/search__stroke_"
+
+                        />
+                </com.google.android.material.card.MaterialCardView>
+
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+
+                android:id="@+id/links_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/select_buttons"
+                tools:itemCount="1"
+                tools:listitem="@layout/link_item" />
+
+            <LinearLayout
+
+                android:id="@+id/view_all_links"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:background="@drawable/texts_bg"
+                android:gravity="center"
+                android:paddingVertical="12dp"
+                app:layout_constraintTop_toBottomOf="@id/links_recycler">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/link"
+                    android:drawablePadding="20dp"
+                    android:text="View all Links"
+
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/whatsapp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="40dp"
+                android:backgroundTint="#E0F1E3"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/view_all_links"
+                app:strokeColor="#BEEAC5"
+                app:strokeWidth="1dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="20dp"
+                    android:layout_marginStart="12dp"
+                    android:drawableStart="@drawable/vector"
+                    android:drawablePadding="20dp"
+
+                    android:text="Talk with us"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/faq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:background="#E8F1FF"
+                android:backgroundTint="#E8F1FF"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/whatsapp"
+                app:strokeColor="#A6C7FF"
+                app:strokeWidth="1dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="20dp"
+                    android:layout_marginStart="12dp"
+                    android:drawableStart="@drawable/question_mark"
+                    android:drawablePadding="20dp"
+                    android:text="Frequently Asked Questions"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+
+                    android:textStyle="bold" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>

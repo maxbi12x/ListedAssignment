@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="20dp"
+
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/itemtop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/link_item_top_back"
+        android:paddingBottom="16dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+
+            android:id="@+id/item_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="12dp"
+            android:background="@drawable/image_bg"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Sample Link Name..."
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toRightOf="@id/item_image"
+            app:layout_constraintTop_toTopOf="@id/item_image" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="22 Aug 2022"
+            android:textColor="#999CA0"
+            android:textSize="12sp"
+            app:layout_constraintLeft_toLeftOf="@id/name"
+            app:layout_constraintTop_toBottomOf="@id/name" />
+
+        <TextView
+            android:id="@+id/clicks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2023"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintRight_toRightOf="@id/text_clicks"
+            app:layout_constraintLeft_toLeftOf="@id/text_clicks"
+            app:layout_constraintTop_toTopOf="@id/name" />
+
+        <TextView
+            android:id="@+id/text_clicks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Clicks"
+            android:layout_marginEnd="15dp"
+            android:textColor="#999CA0"
+            android:textSize="12sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clicks" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dotted_back"
+        android:paddingBottom="10dp"
+        app:layout_constraintTop_toBottomOf="@id/itemtop"
+
+        >
+
+        <TextView
+            android:id="@+id/link_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="100dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="Link"
+            android:textColor="#0E6FFF"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/copy_link"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/copy_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:padding="10dp"
+            android:src="@drawable/copy"
+            app:layout_constraintBottom_toBottomOf="@id/link_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/link_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
