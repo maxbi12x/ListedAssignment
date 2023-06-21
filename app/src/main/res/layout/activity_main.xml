@@ -137,7 +137,7 @@
                         </LinearLayout>
                     </LinearLayout>
 
-                    <com.jjoe64.graphview.GraphView
+                    <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/graphView"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"

@@ -7,17 +7,25 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.linegrapher.adapters.LinksAdapter
 import com.example.linegrapher.adapters.StatusAdapter
 import com.example.linegrapher.constants.Constants
 import com.example.linegrapher.databinding.ActivityMainBinding
 import com.example.linegrapher.models.DailyItemModel
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.jjoe64.graphview.DefaultLabelFormatter
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
@@ -62,7 +70,6 @@ class MainActivity : AppCompatActivity(), LinksAdapter.LinksClickListener {
         binding.recentLinks.isSelected = false
         Log.e("VALUE", dashboard.data.overall_url_chart.toString())
         loadGraph(dashboard.data.overall_url_chart)
-//        loadGraph()
         loadLinksRecycler(true)
 
     }
@@ -123,9 +130,11 @@ class MainActivity : AppCompatActivity(), LinksAdapter.LinksClickListener {
         }
     }
 
-    private fun loadGraph(map: java.util.LinkedHashMap<String, Int>) {
-        val list = ArrayList<DataPoint>()
-        var x = 0.0
+    @SuppressLint("ResourceType")
+    private fun loadGraph(map: LinkedHashMap<String, Int>) {
+        val entries: MutableList<Entry> = ArrayList()
+        val xLabels  = kotlin.collections.ArrayList<String>()
+        var x = 0f
         val s =
             Constants.getDateWithoutYear(map.entries.first().key) + " - " + Constants.getDateWithoutYear(
                 map.entries.last().key
@@ -133,33 +142,25 @@ class MainActivity : AppCompatActivity(), LinksAdapter.LinksClickListener {
         binding.graphDates.text = s
         for (entry in map.entries) {
             val value = entry.value
-            list.add(DataPoint(x, value.toDouble()))
-            x += 1.0
+            entries.add(Entry(x, value.toFloat()))
+            xLabels.add(Constants.getDateWithoutYear(entry.key))
+            x += 1f
         }
-        val series: LineGraphSeries<DataPoint> = LineGraphSeries<DataPoint>(list.toTypedArray())
-
-        binding.graphView.viewport.borderColor = R.color.purple_500
-        binding.graphView.viewport.isScrollable = false
-        binding.graphView.viewport.isScalable = true
-        binding.graphView.isCursorMode = false
-        binding.graphView.isClickable = false
-        binding.graphView.viewport.isScalable = false
-        binding.graphView.viewport.setMinX(0.0)
-        if (map.size > 0)
-            binding.graphView.viewport.setMaxX(map.size.toDouble() - 1)
-        binding.graphView.viewport.setMinY(0.0)
-        binding.graphView.titleTextSize = 14f
-        binding.graphView.viewport.borderColor = R.color.white
-        binding.graphView.gridLabelRenderer.labelFormatter = object : DefaultLabelFormatter() {
-            override fun formatLabel(value: Double, isValueX: Boolean): String {
-                return if (isValueX) {
-                    value.toInt().toString()
-                } else {
-                    super.formatLabel(value, isValueX)
-                }
-            }
-        }
-        binding.graphView.addSeries(series)
+        var dataSet = LineDataSet(entries, "Customized values")
+        dataSet.setDrawFilled(true)
+        dataSet.setDrawCircles(false)
+        dataSet.setDrawValues(false)
+        dataSet.lineWidth=2f
+        dataSet.fillDrawable = ContextCompat.getDrawable(this, R.drawable.gradient)
+        dataSet.color = ContextCompat.getColor(this, R.color.blue)
+        dataSet.valueTextColor = ContextCompat.getColor(this, R.color.black)
+        val xAxis = binding.graphView.xAxis
+        xAxis.valueFormatter = IndexAxisValueFormatter(xLabels)
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.granularity = 1f
+        val data = LineData(dataSet)
+        binding.graphView.data = data
+        binding.graphView.invalidate()
     }
 
     private fun setObservers() {
